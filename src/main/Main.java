@@ -1,12 +1,13 @@
-package main;
-
 // Homework 1: JavaGUI - Books
 // Student Name: Bradley Chippi
 // Course: CS421, Fall 2017
 // Instructor: Dr. Cho
 // Date finished: 9-5-2017
-// Program description:
+// Program description: This application allows a user to lookup what books they need for their classes.
+// All of the books from the CSIS department for Fall 2017 gets pushed into the application. Additionally,
+// users can add the books to their cart.
 
+package main;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -20,16 +21,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Main starts the GUI up and brings you to the main screen. At the main screen, you can
- * add sales or see all the previous sales.
+ * search for your required books for a certain class.
  *
  * @author Bradley Chippi
- * @version 1.0 March 29, 2017
+ * @version 1.0 September 5, 2017
  */
 
 public class Main extends Application {
@@ -37,8 +36,8 @@ public class Main extends Application {
     private boolean found = false;
 
     /**
-     * starts up the main GUI, reads the db to read the items
-     * and then you have the option to add sales or see all previous sales.
+     * Starts up the main GUI, calls to read the txt file to get book info,
+     * and then you have the option to search for your required books for a certain class.
      *
      * @param stage Stage
      */
@@ -146,10 +145,17 @@ public class Main extends Application {
         stage.show();
     }
 
+    /**
+     * Gets book information from Textbooks.txt and creates an object array of Books.
+     * The object array is returned back.
+     *
+     * @return Book[] array of Book objects
+     */
+
     public Book[] setData() {
         Book[] books = new Book[17];
-        String file = "src/main/resources/Textbooks.txt";
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        InputStream in = getClass().getResourceAsStream("/Textbooks.txt");
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
             String line;
             int i = 0;
             while ((line = br.readLine()) != null) {
@@ -164,6 +170,13 @@ public class Main extends Application {
         return books;
     }
 
+    /**
+     * Checks to see if a string contains another string. EX: (dog, og) => True
+     *
+     * @param str1 Main string
+     * @param str2 Check to see if this string is in str1
+     * @return boolean True/False
+     */
     public boolean contains(String str1, String str2) {
         str1 = str1 == null ? "" : str1;
         str2 = str2 == null ? "" : str2;
@@ -171,6 +184,9 @@ public class Main extends Application {
         return str1.toUpperCase().contains(str2.toUpperCase());
     }
 
+    /**
+     * Calls main GUI
+     */
     public static void main(String[] args) {
         launch(args);
     }

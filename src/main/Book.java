@@ -1,18 +1,20 @@
-package main;
-
 // Homework 1: JavaGUI - Books
 // Student Name: Bradley Chippi
 // Course: CS421, Fall 2017
 // Instructor: Dr. Cho
 // Date finished: 9-5-2017
-// Program description:
+// Program description: This application allows a user to lookup what books they need for their classes.
+// All of the books from the CSIS department for Fall 2017 gets pushed into the application. Additionally,
+// users can add the books to their cart.
+
+package main;
 
 /**
- *  keeps track of all the books that are ready to be sold.
- * An book has a character identifier, a name, and a price.
+ * Keeps track of all the books that are required for individual classes.
+ * A book has a title, author, publisher, isbn, keywords, course it aligns to, and price.
  *
  * @author Bradley Chippi
- * @version 1.0 March 29, 2017
+ * @version 1.0 September 5, 2017
  */
 
 class Book {
@@ -44,7 +46,8 @@ class Book {
      * @param title     title of book
      * @param author    author of book
      * @param publisher publisher of book
-     * @param isbn      isbn10 identifier for book
+     * @param isbn      isbn identifier for book
+     * @param course    course the book aligns to
      * @param price     price of book
      */
 
@@ -106,14 +109,29 @@ class Book {
         return this.isbn;
     }
 
+    /**
+     * Grabs the books course it aligns to
+     *
+     * @return course it aligns to
+     */
     public String getCourse() {
         return this.course;
     }
 
+    /**
+     * Grabs the books keywords
+     *
+     * @return books keywords
+     */
     public String getKeywords(){
         return String.join(" ", this.keywords);
     }
 
+    /**
+     * Grabs all book information in one return
+     *
+     * @return books info
+     */
     public String toString(){
         return "TITLE: "+ this.title + "\n" + "AUTHOR: "+this.author + "\n" + "PUBLISHER: " +
                 this.publisher + "\n" + "IBSN: "+this.isbn + "\n" + "COURSE: "+this.course;
